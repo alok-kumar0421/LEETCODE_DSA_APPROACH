@@ -14,6 +14,15 @@ class Solution {
             }
         }
     }
+    public static void dfs(List<List<Integer>> list, boolean [] vis, int s, int d){
+        vis[s]=true;
+        if(vis[d]==true)return;
+        for(int ele : list.get(s)){
+            if(vis[ele]==false){
+                dfs(list, vis, ele, d);
+            }
+        }
+    }
     public boolean validPath(int n, int[][] edges, int s, int d) {
         List<List<Integer>> list = new ArrayList<>();
         for(int i=0;i<n;i++){
@@ -24,7 +33,8 @@ class Solution {
             list.get(edges[i][1]).add(edges[i][0]);
         }
         boolean [] vis = new boolean[n];
-        bfs(list, vis, s, d);
+        // bfs(list, vis, s, d);
+        dfs(list, vis, s, d);
         return vis[d]==true;
     }
 }
