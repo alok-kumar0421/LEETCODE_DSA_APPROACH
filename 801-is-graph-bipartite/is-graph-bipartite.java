@@ -8,7 +8,7 @@ class Solution {
             int front = q.poll();
             int color = vis[front];
             for(int x : graph[front]){
-                if(vis[x]==color){
+                if(vis[x]==vis[front]){
                     ans=false;
                     return;
                 }
@@ -25,6 +25,7 @@ class Solution {
         ans=true;
         Arrays.fill(vis,-1);
         for(int i=0;i<n;i++){
+            if(ans==false)return false;
             if(vis[i]==-1){
                 bfs(graph, vis, i);
             }
